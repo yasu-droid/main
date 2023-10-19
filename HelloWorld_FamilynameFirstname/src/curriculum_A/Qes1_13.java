@@ -4,65 +4,69 @@ public class Qes1_13 {
 
 	public static void main(String[] args) {
 		// TODO 自動生成されたメソッド・スタブ
-		//問１		
-		byte a;//バイト型
-		short b;//短整数型
-		int c;//整数型
-		long d ;//長い整数型
+		// 問１		
+		byte by; //バイト型
+		short sh; //短整数型
+		int in; //整数型
+		long lo ; //長い整数型
 
-		float decnum;//単精度浮動小数点数型
-		double nums;//倍精度浮動小数点数型
+		float decnum; //単精度浮動小数点数型
+		double nums; //倍精度浮動小数点数型
 
-		int word;//文字型
-		String msg ;//文字列型;
-		boolean b1;//boolean型
+		char word; //文字型
+		String msg ; //文字列型;
+		boolean bool; //boolean型
 
 		//		問2
-		a = 0;
-		b = 1;
-		c = 2;
-		d = 3;
+		by = 0;
+		sh= 0;
+		in = 0;
+		lo = 0;
 
-		decnum = 4f;
-		nums = 5;
-		word = a;
-		msg = "こんにちは";
-		b1 = false;
+		decnum = 0.0f;
+		nums = 0.0d;
+		word = '\u0000';
+		msg = "null";
+		bool = false;
 
 		//		問3
-		a = 10;
-		b = 100;
-		c = 1000;
-		d = 10000;
+		by = 10;
+		sh = 100;
+		in = 1000;
+		lo = 10000;
 
 		decnum = 9.5f;
 		nums = 10.5;
-		word = a;
+		word = 'a';
 		msg = "ハロー";
-		b1 = true;
+		bool = true;
 
 
 		//		問4 11110のコンソールへの出力
-		double sum = a + b + c + d;
+		double sum = by + sh + in + lo;
 		System.out.println(sum);
 
 		//		20の出力
-		int multi = a * 2;
+		int multi = by * 2;
 		System.out.println(multi);
+
+		//		a ハロー trueの出力
+		System.out.println(word+msg+bool);
+
 
 		//		11130の出力
 		System.out.println(sum + multi);
 
 		//		10000000000の出力
-		long multiabcd = a * b * c * d;	
+		long multiabcd = by * sh * in * lo;	
 		System.out.println(multiabcd);
 
 		//		0.105の出力
-		double divi = nums / b;
+		double divi = nums / sh;
 		System.out.println(divi);
 
 		//		-90の出力
-		int subtra = a - b;
+		int subtra = by - sh;
 		System.out.println(subtra);
 
 		//		問5
@@ -129,11 +133,11 @@ public class Qes1_13 {
 		System.out.println(ageWord+heightWord+weightWord);
 
 		//        問12
-		 int ageInteger = Integer.parseInt(ageWord);
-		 System.out.println(ageInteger);
-		 
-		 int heightInteger = (int)Double.parseDouble(heightWord);
-		 System.out.println(heightInteger);
+		int ageInteger = Integer.parseInt(ageWord);
+		System.out.println(ageInteger);
+
+		int heightInteger = (int)Double.parseDouble(heightWord);
+		System.out.println(heightInteger);
 
 	}
 

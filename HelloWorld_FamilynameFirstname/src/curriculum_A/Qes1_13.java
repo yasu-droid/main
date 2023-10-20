@@ -47,7 +47,7 @@ public class Qes1_13 {
 		System.out.println(sum);
 
 		//		20の出力
-		float multi = by * 2;
+		double multi = decnum+nums;
 		System.out.println(multi);
 
 		//		a ハロー trueの出力

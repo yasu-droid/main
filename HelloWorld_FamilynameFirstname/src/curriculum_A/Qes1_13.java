@@ -26,7 +26,7 @@ public class Qes1_13 {
 		decnum = 0.0f;
 		nums = 0.0d;
 		word = '\u0000';
-		msg = "null";
+		msg = null;
 		bool = false;
 
 		//		問3
@@ -47,7 +47,7 @@ public class Qes1_13 {
 		System.out.println(sum);
 
 		//		20の出力
-		int multi = by * 2;
+		float multi = by * 2;
 		System.out.println(multi);
 
 		//		a ハロー trueの出力

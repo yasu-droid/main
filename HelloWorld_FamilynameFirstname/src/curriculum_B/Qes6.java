@@ -27,38 +27,38 @@ public class Qes6 {
 			switch(str) {
 			case "パソコン":
 				//「パソコン」の残り台数を表示
-				System.out.println(str+"の残り台数は"+pieces[0]+"台です");
+				System.out.println(str + "の残り台数は" + pieces[0] + "台です");
 				break;
-			//	コンソールに「冷蔵庫」が入っている場合
+				//	コンソールに「冷蔵庫」が入っている場合
 			case "冷蔵庫":
 				//「冷蔵庫」の残り台数を表示
-				System.out.println(str+"の残り台数は"+pieces[1]+"台です");
+				System.out.println(str+"の残り台数は" + pieces[1] + "台です");
 				break;
-			//	コンソールに「洗濯機」が入っている場合
+				//	コンソールに「洗濯機」が入っている場合
 			case "洗濯機":
 				//「洗濯機」の残り台数を表示
-				System.out.println(str+"の残り台数は"+pieces[2]+"台です");
+				System.out.println(str + "の残り台数は" + pieces[2] + "台です");
 				break;
-			//	コンソールに「加湿器」が入っている場合
+				//	コンソールに「加湿器」が入っている場合
 			case "加湿器":
 				//「加湿器」の残り台数を表示
-				System.out.println(str+"の残り台数は"+pieces[3]+"台です");
+				System.out.println(str + "の残り台数は" + pieces[3] + "台です");
 				break;
 
-			//	コンソールに「テレビ」、「ディスプレイ」が入っている場合
+				//	コンソールに「テレビ」、「ディスプレイ」が入っている場合
 			case "テレビ","ディスプレイ":
 				//「テレビ」が入っている場合は、テレビの残り台数を表示、「ディスプレイ」が入っている場合は、[11-テレビの残り台数]を残り台数として表示
-				System.out.println( str.equals("テレビ")?str+"の残り台数は"+ pieces[4]+"台です":str+"の残り台数は"+ (11 - pieces[4])+"台です");
+				System.out.println( str.equals("テレビ")?str + "の残り台数は" + pieces[4] + "台です":str + "の残り台数は" + (11 - pieces[4]) + "台です");
 			break;
 			// 上記以外の商品名が入っている場合
 			default:
 				// 指定の商品ではないと表示
-				System.out.println("『"+str + "』は指定の商品ではありません");
+				System.out.println("『" + str + "』は指定の商品ではありません");
 
 			}
 		}
 
-
+		scanner.close();
 	}
 
 }

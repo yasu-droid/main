@@ -6,7 +6,7 @@ public class Qes7 {
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		scanner.close();
+
 		//コンソールで人数の入力を受付
 		System.out.print("生徒の人数を入力してください（２名以上）: ");
 		int people = scanner.nextInt();
@@ -88,6 +88,6 @@ public class Qes7 {
 			//すべての生徒のテストの平均点をコンソールに出力
 			System.out.println("全体の平均点は" + String.format("%.2f", sumaverage) + "点です。");
 		}
-
+		scanner.close();
 	}
 }

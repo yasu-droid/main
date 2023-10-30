@@ -50,7 +50,6 @@ public class Curriculum_New_1_18{
  // ※小数点以下も表示されるようにしてください。
  private static double ave(int[] cons) {
 
-  
   double sum = 0;
 
   double average = 0;
@@ -96,11 +95,7 @@ public class Curriculum_New_1_18{
   order(ordernum);
   // Q4
   multi(1.1 , 1.1);
-  // Q5
-  randnum(4);
-  // Q6
-  ave(randnum(4));
-  // Q7
+  // Q5，Q6、Q7
   judge(ave(randnum(4)));
  }
 }

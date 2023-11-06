@@ -4,21 +4,41 @@ public class Profile {
 	private String name;
 	private double height;
 	private int speed;
-	
+
+	//ゲッターの使用
+	public String getName(String name) {
+		System.out.println("名前:" + name);
+		return name;
+	}
+
 	//セッターを使った
-	public void setName(String name) {
-		this.name = name;
-		System.out.println("動物名:" + name);
+	public void setHeight(double height) {
+		// heightがマイナスなら
+		if(height <= 0) {
+			// 0として出力
+			System.out.println("マイナスは設定できません。０を設定します");
+			System.out.println("体長:" + 0 + "m");
+		// それ以外なら
+		}else {
+			// heightに入力された数値を出力
+			this.height = height;
+			System.out.println("体長:" + height + "m");
+		}
 	}
-	//ゲッターを使った
-	public double getHeight(double height) {
-		System.out.println("体長:" + height + "m");
-		return height;
-	}
-	
+
+	//セッターを使った
 	public void setSpeed(int speed) {
-		this.speed = speed;
-		System.out.println("速度:" + speed + "km/h");
+		// speedがマイナスなら
+		if(speed <= 0){
+			// 0として出力
+			System.out.println("マイナスは設定できません。０を設定します");
+			System.out.println("速度:" + 0 + "km/h");
+		// それ以外なら
+		}else {
+			this.speed = speed;
+			// speedに入力された数値を出力
+			System.out.println("速度:" + speed + "km/h");	
+		}
 	}
 
 }

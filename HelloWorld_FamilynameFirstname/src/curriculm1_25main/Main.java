@@ -1,10 +1,10 @@
 package curriculm1_25main;
-
 import java.util.Random;
 import java.util.Scanner;
 
 import curriculm1_25process.Character;
 import curriculm1_25process.Player;
+
 
 public class Main {
 
@@ -16,6 +16,7 @@ public class Main {
 
 		Scanner sc1 = new Scanner(System.in);
 		String name = sc1.nextLine();
+		sc1.close();
 
 		Random hp = new Random();
 		Random mp = new Random();
@@ -57,6 +58,9 @@ public class Main {
 
 		System.out.println("");
 		System.out.println("さあ冒険に出かけよう！");
+		
+
 
 	}
+
 }

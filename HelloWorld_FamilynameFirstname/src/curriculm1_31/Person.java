@@ -12,7 +12,7 @@ class Person{
 		this.age = age;
 		this.height = height;
 		this.weight = weight;
-		this.count = count;
+		this.count = count + 1;
 	}
 
 	public double bmi(){

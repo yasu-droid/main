@@ -1,4 +1,4 @@
-package curriculm1_30;
+package curriculm1_29;
 
 class Person{
 	// インスタンスフィールドを定義

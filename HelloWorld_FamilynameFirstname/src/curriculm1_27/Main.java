@@ -70,6 +70,22 @@ public class Main {
 					//	該当の情報がない、もしくは１つ以上該当していないものが含まれている場合
 					System.out.println("入力した動物の情報が見つかりませんでした");
 				}
+				
+//				別回答
+//				switch(animal_secondsplit[0]) {
+//				case "ライオン":
+//					System.out.println("動物名:ライオン");
+//					System.out.println("体長:"+animal_secondsplit[1] +"m");
+//					System.out.println("速度:"+animal_secondsplit[2] +"km/h");
+//					System.out.println("学名:パンテラ レオ");
+//					break;
+//				default:
+//					// どの条件にもマッチしない場合の処理
+//					throw new RuntimeException("エラーが発生しました。");
+//
+//				}
+				
+				
 			}
 
 

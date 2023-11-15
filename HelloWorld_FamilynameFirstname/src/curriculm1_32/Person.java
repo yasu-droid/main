@@ -29,7 +29,7 @@ class Person{
 		return this.weight / this.height / this.height;
 	}
 
-	public void printCount(){
+	public static void printCount(){
 		System.out.println("合計" + Person.count + "人です");
 	}
 }

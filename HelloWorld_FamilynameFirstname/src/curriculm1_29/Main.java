@@ -1,4 +1,4 @@
-package curriculm1_29;
+package curriculm1_30;
 
 class Main {
 	public static void main(String[] args) {

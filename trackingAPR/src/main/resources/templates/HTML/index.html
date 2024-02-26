@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>子どものお小遣い帳アプリ</title>
+    <!-- <link th:href="@{/css/reset2.css}" rel="stylesheet" type="text/css">-->
+    <link th:href="@{/css/style2.css}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <h1>トラッキング</h1>
+    
+    
+    <div id="menuBox">
+        <div id="listShift" class="changeColor">リスト</div>
+        <div id="timerShift" class="changeColor">タイマー</div>
+    </div>
+
+    <button class="accordion">集中モードの時間を設定する</button>
+    <div class="panel">
+        <input type="number" id="concentrationMinutes" min="1" max="99" value="25"> 分
+        <button id="setConcentrationTime">設定</button>
+    </div>
+
+    <button class="accordion">休憩モードの時間を設定する</button>
+    <div class="panel">
+        <input type="number" id="breakMinutes" min="1" max="99" value="5"> 分
+        <button id="setBreakTime">設定</button>
+    </div>
+
+
+    <div id="concentrationTimer" class="timer-container active">
+        <h2>集中モード</h2>
+
+        <div id="countdown1">25:00</div>
+        <button id="startStopButton1">スタート</button>
+        <button id="resetButton1">リセット</button>
+    </div>
+
+    <div id="breakTimer" class="timer-container">
+        <h2>休憩モード</h2>
+
+        <div id="countdown2">05:00</div>
+        <button id="startStopButton2">スタート</button>
+        <button id="resetButton2">リセット</button>
+    </div>
+
+    <script type="text/javascript" th:inline="javascript" th:src=" @{/js/script2.js}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>子どものお小遣い帳アプリ</title>
+</head>
+
+<body>
+
+	<form id="timerSettingsForm">
+		<label for="concentrationTime">集中モード時間（分）：</label>
+		<input type="number" id="concentrationTime" min="1" max="99" value="25">
+		<br>
+		<label for="breakTime">休憩モード時間（分）：</label>
+		<input type="number" id="breakTime" min="1" max="99" value="5">
+		<br>
+		<button type="submit" id="submitButton">設定する</button>
+	</form>
+
+	<script>
+		document.getElementById("timerSettingsForm").addEventListener("submit", function (event) {
+			event.preventDefault(); // デフォルトのフォーム送信を防止
+
+			// 入力された時間を取得
+			const concentrationTime = document.getElementById("concentrationTime").value;
+			const breakTime = document.getElementById("breakTime").value;
+
+			// ローカルストレージに保存
+			localStorage.setItem("concentrationTime", concentrationTime);
+			localStorage.setItem("breakTime", breakTime);
+
+			alert("設定が完了しました！");
+
+			// index.htmlにリダイレクト
+			location.href = 'http://localhost:8080/';
+		});
+	</script>
+
+</body>
+
+</html>

@@ -104,16 +104,7 @@ document.getElementById("startStopButton2").addEventListener("click", function()
 	startStopTimer2();
 });
 
-// タイマー1（集中モード）のリセットボタンのクリックイベント
-document.getElementById("resetButton1").addEventListener("click", function() {
-	resetTimer("concentration");
-});
-
-// タイマー2（休憩モード）のリセットボタンのクリックイベント
-document.getElementById("resetButton2").addEventListener("click", function() {
-	resetTimer("break");
-});
-// タイマー1（集中モード）の入力フィールドの値が変更された際のイベント
+// 集中モードの入力フィールドの値が変更された際のイベント
 document.getElementById("minutesInput1").addEventListener("input", function() {
 	let value = parseInt(this.value);
 	// 入力値が無効な場合はデフォルト値を設定（25分）
@@ -124,9 +115,12 @@ document.getElementById("minutesInput1").addEventListener("input", function() {
 	}
 	minutes1 = this.value;
 	document.getElementById("countdown1").innerHTML = pad(minutes1) + ":00";
+
+	// 新しい値をsessionStorageに保存して更新する
+	sessionStorage.setItem('inputNumber', minutes1);
 });
 
-// タイマー2（休憩モード）の入力フィールドの値が変更された際のイベント
+// 休憩モードの入力フィールドの値が変更された際のイベント
 document.getElementById("minutesInput2").addEventListener("input", function() {
 	let value = parseInt(this.value);
 	// 入力値が無効な場合はデフォルト値を設定（5分）
@@ -137,6 +131,16 @@ document.getElementById("minutesInput2").addEventListener("input", function() {
 	}
 	minutes2 = this.value;
 	document.getElementById("countdown2").innerHTML = pad(minutes2) + ":00";
+
+	// 新しい値をsessionStorageに保存して更新する
+	sessionStorage.setItem('breakInputNumber', minutes2);
+
+	// 休憩モードの時間を設定の時間に戻す
+	breakStoredNumber = minutes2;
+	seconds2 = 0;
+
+	// リセット後、集中モードのタイマーの表示を設定した数に更新
+	document.getElementById("countdown1").innerHTML = pad(storedNumber) + ":00";
 });
 
 function startStopTimer1() {
@@ -152,7 +156,6 @@ function startStopTimer1() {
 			} else if (minutes1 > 0) {
 				seconds1 = 59;
 				minutes1--;
-				// タイマーの数字を設定の数字に戻す
 			} else if (minutes1 === 0 && seconds1 === 0) {
 				seconds1 = 0;
 				clearInterval(countdownInterval1);
@@ -167,8 +170,22 @@ function startStopTimer1() {
 		document.getElementById("startStopButton1").innerHTML = "ストップ";
 		isTimerRunning1 = true;
 	}
-}
 
+	// タイマー1（集中モード）の終了ボタンのクリックイベント
+	document.getElementById("endButton1").addEventListener("click", function() {
+		clearInterval(countdownInterval1);
+		document.getElementById("countdown1").innerHTML = pad(storedNumber) + ":00"; // 設定した数字に更新
+		document.getElementById("startStopButton1").innerHTML = "スタート";
+		isTimerRunning1 = false;
+
+		// 休憩モードに移行する
+		toggleMode("break");
+		toggleTimer("breakTimer");
+		seconds1 = 0; // 秒数もリセットする
+		minutes1 = storedNumber; // 集中モードの時間を設定の時間に戻す
+	});
+}
+// タイマー2（休憩モード）のスタート/ストップボタンの処理
 function startStopTimer2() {
 	if (isTimerRunning2) {
 		clearInterval(countdownInterval2);
@@ -182,39 +199,49 @@ function startStopTimer2() {
 			} else if (minutes2 > 0) {
 				seconds2 = 59;
 				minutes2--;
+				// タイマーの数字を設定の数字に戻す
 			} else if (minutes2 === 0 && seconds2 === 0) {
 				seconds2 = 0;
 				clearInterval(countdownInterval2);
 				alert("休憩時間が終了しました！");
 				toggleMode("concentration");
 				toggleTimer("concentrationTimer");
-				// タイマーの数字を設定の数字に戻す
+				startStopTimer1(); // 集中モードのタイマーを開始する
 				minutes2 = breakStoredNumber;
-				startStopTimer1(); // タイマー1を再生
 			}
 			document.getElementById("countdown2").innerHTML = pad(minutes2) + ":" + pad(seconds2);
 		}, 1000);
 		document.getElementById("startStopButton2").innerHTML = "ストップ";
 		isTimerRunning2 = true;
 	}
-}
-// タイマー1（集中モード）またはタイマー2（休憩モード）のリセットボタンの処理
-function resetTimer(mode) {
-	if (mode === "concentration") {
-		clearInterval(countdownInterval1);
-		minutes1 = concentrationMinutes.value;
-		seconds1 = 0;
-		document.getElementById("countdown1").innerHTML = pad(minutes1) + ":00";
-		document.getElementById("startStopButton1").innerHTML = "スタート";
-		isTimerRunning1 = false;
-	} else if (mode === "break") {
+	// タイマー2（休憩モード）の終了ボタンのクリックイベント
+	document.getElementById("endButton2").addEventListener("click", function() {
 		clearInterval(countdownInterval2);
-		minutes2 = breakMinutes.value;
-		seconds2 = 0;
-		document.getElementById("countdown2").innerHTML = pad(minutes2) + ":00";
+		document.getElementById("countdown2").innerHTML = pad(breakStoredNumber) + ":00"; // 設定した数字に更新
 		document.getElementById("startStopButton2").innerHTML = "スタート";
 		isTimerRunning2 = false;
-	}
+
+		// 集中モードに移行する
+		toggleMode("concentration");
+		toggleTimer("concentrationTimer");
+		minutes2 = breakStoredNumber; // 休憩モードの時間を設定の時間に戻す
+		seconds2 = 0; // 秒数もリセットする
+		
+		// 集中モードで測った時間を計算
+		let concentrationMinutesPassed = 25 - minutes1;
+		let concentrationSecondsPassed = 60 - seconds1;
+
+		// 休憩モードで測った時間を計算
+		let breakMinutesPassed = minutes2;
+		let breakSecondsPassed = 60 - seconds2;
+
+		// コンソールに集中モードで測った時間を表示
+		console.log("集中モードで測った時間: " + concentrationMinutesPassed + "分 " + concentrationSecondsPassed + "秒");
+
+		// コンソールに休憩モードで測った時間を表示
+		console.log("休憩モードで測った時間: " + breakMinutesPassed + "分 " + breakSecondsPassed + "秒");
+	});
+
 }
 
 // 集中モードまたは休憩モードの切り替え

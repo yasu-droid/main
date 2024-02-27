@@ -144,11 +144,15 @@ document.getElementById("minutesInput2").addEventListener("input", function() {
 });
 
 function startStopTimer1() {
+	let startTime1; // タイマー開始時の時間を格納する変数を宣言
+
 	if (isTimerRunning1) {
 		clearInterval(countdownInterval1);
 		document.getElementById("startStopButton1").innerHTML = "スタート";
 		isTimerRunning1 = false;
 	} else {
+		startTime1 = Date.now(); // タイマー開始時の時間を取得
+
 		countdownInterval1 = setInterval(function() {
 			document.getElementById("countdown1").innerHTML = pad(minutes1) + ":" + pad(seconds1);
 			if (seconds1 >= 1) {
@@ -159,11 +163,23 @@ function startStopTimer1() {
 			} else if (minutes1 === 0 && seconds1 === 0) {
 				seconds1 = 0;
 				clearInterval(countdownInterval1);
-				alert("集中時間が終了しました！");
+
+				let endTime1 = Date.now(); // タイマー終了時の時間を取得
+				let elapsedTime1 = (endTime1 - startTime1) / 1000; // スタートから終了までの経過時間を計算
+
+				if (elapsedTime1 >= storedNumber * 60) {
+					elapsedTime1 -= 1; // 時間いっぱいまで計測した場合は結果をマイナス1秒する
+				}
+
+				console.log("集中時間が終了しました！ 経過時間: " + elapsedTime1.toFixed(2) + "秒");
+
+				alert("集中時間が終了しました！\n経過時間: " + elapsedTime1.toFixed(2) + "秒");
+
 				toggleMode("break");
 				toggleTimer("breakTimer");
 
 				minutes1 = storedNumber;
+				startTime1 = null; // 計測を終了させるため、startTime1をnullにリセット
 			}
 			document.getElementById("countdown1").innerHTML = pad(minutes1) + ":" + pad(seconds1);
 		}, 1000);
@@ -171,19 +187,29 @@ function startStopTimer1() {
 		isTimerRunning1 = true;
 	}
 
-	// タイマー1（集中モード）の終了ボタンのクリックイベント
 	document.getElementById("endButton1").addEventListener("click", function() {
 		clearInterval(countdownInterval1);
-		document.getElementById("countdown1").innerHTML = pad(storedNumber) + ":00"; // 設定した数字に更新
+		document.getElementById("countdown1").innerHTML = pad(storedNumber) + ":00";
 		document.getElementById("startStopButton1").innerHTML = "スタート";
 		isTimerRunning1 = false;
 
-		// 休憩モードに移行する
 		toggleMode("break");
 		toggleTimer("breakTimer");
-		seconds1 = 0; // 秒数もリセットする
-		minutes1 = storedNumber; // 集中モードの時間を設定の時間に戻す
+		seconds1 = 0;
+		minutes1 = storedNumber;
 
+		if (startTime1) {
+			let elapsedTime1 = (Date.now() - startTime1) / 1000; // スタートから終了までの経過時間を計算
+
+			if (elapsedTime1 >= storedNumber * 60) {
+				elapsedTime1 -= 1; // 時間いっぱいまで計測した場合は結果をマイナス1秒する
+			}
+
+			console.log("スタートから終了までの時間: " + elapsedTime1.toFixed(2) + "秒");
+			startTime1 = null; // 計測を終了させるため、startTime1をnullにリセット
+		} else {
+
+		}
 	});
 }
 // タイマー2（休憩モード）のスタート/ストップボタンの処理
@@ -228,19 +254,6 @@ function startStopTimer2() {
 		minutes2 = breakStoredNumber; // 休憩モードの時間を設定の時間に戻す
 		seconds2 = 0; // 秒数もリセットする
 
-		// 集中モードで測った時間を計算
-		let concentrationMinutesPassed = 25 - minutes1;
-		let concentrationSecondsPassed = 60 - seconds1;
-
-		// 休憩モードで測った時間を計算
-		let breakMinutesPassed = minutes2;
-		let breakSecondsPassed = 60 - seconds2;
-
-		// コンソールに集中モードで測った時間を表示
-		console.log("集中モードで測った時間: " + concentrationMinutesPassed + "分 " + concentrationSecondsPassed + "秒");
-
-		// コンソールに休憩モードで測った時間を表示
-		console.log("休憩モードで測った時間: " + breakMinutesPassed + "分 " + breakSecondsPassed + "秒");
 	});
 
 }
